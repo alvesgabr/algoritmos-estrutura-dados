@@ -1,4 +1,4 @@
-### Algorithms & Data Structure in C# -  Class Code / Exercises
+### Algorithms & Data Structure -  Class Code / Exercises in C#
 
 Major: Management Information Systems.
 
