@@ -16,19 +16,8 @@ class Lista {
     n = 0;
   }
 
-  public void InserirInicio(int x){
-    if(n >= array.Length){
-      Console.WriteLine("Invalid!");
-      Environment.Exit(0);
-    }
-    for(int i = n; i > 0; i--){
-      array[i] = array[i-1];
-    }
-    array[0] = x;
-    n++;
-  }
-
-  public void InserirFim(int x){
+// 8 - Modifique nossa lista linear, criando uma pilha. 
+  public void Inserir(int x){
     if(n >= array.Length){
       Console.WriteLine("Invalid!");
       Environment.Exit(0);
@@ -37,50 +26,13 @@ class Lista {
     n++;
   }
 
-  public void Inserir(int x, int pos){
-    if(n >= array.Length || pos < 0 || pos > n){
-      Console.WriteLine("Invalid!");
-      Environment.Exit(0);
-    }
-    for(int i = n; i > pos; i--){
-      array[i] = array[i-1];
-    }
-    array[pos] = x;
-    n++;
-  }
-
-  public int RemoverInicio(){
-    if(n == 0){
-      Console.WriteLine("Invalid!");
-      Environment.Exit(0);
-    }
-    int temp = array[0];
-    n--;
-    for(int i = 0; i < n; i++){
-      array[i] = array[i+1];
-    }
-    return temp;
-  }
-
-  public int RemoverFim(){
+// 8 - Modifique nossa lista linear, criando uma pilha. 
+  public int Remover(){
     if(n == 0){
       Console.WriteLine("Invalid!");
       Environment.Exit(0);
     }
     return array[--n];
-  }
-
-  public int Remover(int pos){
-    if(n == 0 || pos < 0 || pos >= n){
-      Console.WriteLine("Invalid!");
-      Environment.Exit(0);
-    }
-    int temp = array[pos];
-    n--;
-    for(int i = pos; i < n; i++){
-      array[i] = array[i+1];
-    }
-    return temp;
   }
 
   public void Mostrar(){
@@ -138,24 +90,24 @@ class Lista {
     }
     return cont;
   }
-  
+
 // 5 - Modifique nossa lista linear, de tal forma que ela não tenha a referência último. WTF???????
 // 6 - Modifique nossa lista linear, de tal forma que ela não tenha a referência último. WTF???????
 
 }
 
-class ECRS01 {
+class ECRS01Stack {
   static void Main(string[] args){
     Console.WriteLine("Linear:");
     Lista l = new Lista(6);
     int x1, x2, x3;
 
-    l.InserirInicio(10);
-    l.InserirFim(7);
-    l.InserirFim(9);
-    l.InserirInicio(3);
-    l.Inserir(8, 3);
-    l.Inserir(4, 2);
+    l.Inserir(10);
+    l.Inserir(7);
+    l.Inserir(9);
+    l.Inserir(3);
+    l.Inserir(3);
+    l.Inserir(2);
 
     int total = l.Soma();
     Console.WriteLine($"Soma total: {total}");
@@ -174,9 +126,9 @@ class ECRS01 {
     Console.WriteLine("Invertido:");
     l.Mostrar();
 
-    x1 = l.RemoverInicio();
-    x2 = l.RemoverFim();
-    x3 = l.Remover(2);
+    x1 = l.Remover();
+    x2 = l.Remover();
+    x3 = l.Remover();
 
     Console.WriteLine($"Remoção: \n{x1}, {x2}, {x3}\nDepois:");
     l.Mostrar();
