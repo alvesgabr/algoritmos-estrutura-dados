@@ -200,26 +200,119 @@ class List
     for(Node n = _head; n != _tail; n = n.next, size++);
     return size;
   }
-//Em nossa lista flexível, implemente um método que remove a segunda posição válida.
+
+// Task 1 - Em nossa lista flexível, implemente um método que remove a segunda posição válida.
   public int RemoveSecond()
   {
-    Node n = _head;
     int tdata = _head.next.next.data;
-    _head.next = _head.next.next;
-    n.next = null;
+    _head.next.next = _head.next.next.next; // this is ugly, but it works
     return tdata;
   }
 
-//Task - Em nossa lista flexível, implemente um método que retorna a soma os elementos contidos na mesma.
+// Task 2 - Em nossa lista flexível, implemente um método que retorna a soma os elementos contidos na mesma.
   public int Sum()
   {
     int temp = 0;
-    for(Node n = _head; n != null; n = n.next)
+    for(Node n = _head.next; n != null; n = n.next)
     {
       temp += n.data;
     }
     return temp;
   }
+
+// Task 3 - Em nossa lista flexível, implemente um método que retorna o maior elemento contido na mesma.
+  public int HighestInt()
+  {
+    int highest = 0;
+    for(Node n = _head; n != null; n = n.next)
+    {
+      if(n.data > highest)
+        highest = n.data;
+    }
+    return highest;
+  }
+
+// Task 4 - Em nossa lista flexível, implemente um método que retorna o terceiro elemento supondo que o mesmo existe.
+  public int ThirdValue()
+  {
+    int tdata = 0;
+    Node temp = _head.next.next.next;
+    if(temp != null)
+    {
+      tdata = temp.data;
+    }
+    return tdata;
+  }
+
+// Task 5 - Em nossa lista flexível, implemente um método que inverte a ordem dos seus elementos.
+  public void Reverse()
+  {
+    Node prev = null, curr = _head, next = null;
+    while(curr != null)
+    {
+      next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+    _head = prev;
+  }
+
+// Task 6 - Em nossa lista flexível, implemente um método que retorna o número de elementos pares and múltiplos de cinco contidos na mesma.
+  public int MultiplesOfTwonFive()
+  {
+    int tmp = 0;
+    for(Node n = _head.next; n != null; n = n.next)
+    {
+      if((n.data % 2 == 0) && (n.data % 5 == 0))
+      {
+        tmp++;
+      }
+    }
+    return tmp;
+  }
+
+// Task 7 - Modifique nossa lista flexível, de tal forma que ela não tenha a referência último.
+  public void CutTail()
+  {
+    if(_head == _tail)
+      Console.WriteLine("Error");
+    Node n = _head;
+    while(n.next.next != null)
+      n = n.next;
+    _tail = n;
+    _tail.next = null;
+  }
+
+// Task 8 - Modifique nossa lista flexível, criando uma fila flexível.
+// ngl, this is unecessary of a task, simply force only the following methods
+// AddToEnd and RemoveAtStart and it will behave just like a queue;
+
+// Task 9 - Modifique nossa lista flexível, criando uma pilha flexível.
+// just like previous task, simply remove all insertion and removal methods
+// other than AddToEnd and RemoveAtEnd and it will behave just like a normal stack;
+
+// Task 10 - Modifique nossa lista flexível, criando uma lista ordenada.
+// im confused at this one, i guess the professor wants a sort method, ill give my fair shot;
+  public void Sort()
+  {
+    Node tmp = _head.next, next = null, prev = null;
+    for(Node n = _head.next; n != null; n = n.next)
+    {
+      if(tmp.data > tmp.next.data)
+      {
+        next = tmp;
+        prev = tmp.next;
+        tmp.next = prev;
+        tmp = next;
+      }
+    }
+  }
+// it should work but i guess it isnt, idk why tho
+
+// Task 11 - Modifique nossa lista flexível, criando uma lista duplamente encadeada.
+// idk what this means, and i haven't seen any class referring to it yet
+// ill probably do it eventually at an external class, but im either dumb or never met this b4
 }
 
 class REFCL01
@@ -234,20 +327,37 @@ class REFCL01
     list.AddStart(11);
     list.AddStart(12);
     list.AddPosition(20, 2);
-    list.AddEnd(99);
     
     list.Print();
     Console.WriteLine();
     
+    int listSum = list.Sum();
+    int thirdInt = list.ThirdValue();
+    int highestInt = list.HighestInt();
+    int secondRemoved = list.RemoveSecond();
     int logicallyRemoved = list.RemoveStartLog();
     int professorRemoved = list.RemoveStartProfessor();
-    int secondRemoved = list.RemoveSecond();
-    int listSum = list.Sum();
+    int multiplesOf = list.MultiplesOfTwonFive();
+
+    Console.WriteLine("\nCut Tail:");
+    list.CutTail();
+    list.Print();
+    list.Sort();
+    Console.WriteLine();
+    list.Print();
+    list.Reverse(); // not working properly, ill return to it later
+    // output is { 9 8 7 6 5 4 3 2 1 12 }, og list { 1 2 3 4 5 6 7 8 9 10 }
     
-    Console.WriteLine($"\nHead Logically Removed: {logicallyRemoved}");
-    Console.WriteLine($"Professor Removed: {professorRemoved}");
+    Console.WriteLine($"\n\nList Sum: {listSum}");
+    Console.WriteLine($"Third Value: {thirdInt}");
+    Console.WriteLine($"Highest Value: {highestInt}");
     Console.WriteLine($"Second Removed: {secondRemoved}");
-    Console.WriteLine($"List Sum: {listSum}");
+    Console.WriteLine($"Head Logically Removed: {logicallyRemoved}");
+    Console.WriteLine($"Head Professor Removed: {professorRemoved}");
+    Console.WriteLine($"Multiples of 2 and 5: {multiplesOf}");
+
+    Console.WriteLine("\nReversed && Broken LinkedList: ");
+    list.Print();
   }
 }
 /*
@@ -275,3 +385,9 @@ Console.WriteLine($"Position {pos} Removed:\n{posRemove}");
 int tailRemove = list.RemoveEnd();
 Console.WriteLine($"End of List Removed: {tailRemove}");    
 */
+
+// So far so good, had 4 methods with problems, 2 of which work but barely;
+// My reverse method doesnt work properly, it cuts off the tail, idk why yet;
+// I'm semi proud and hopefully I get more practice soon;
+
+// GG
