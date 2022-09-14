@@ -72,7 +72,6 @@ class List
     Node temp = _head;
     _head = _head.next;       // moving initial pointer
     int tdata = _head.data;   // assign new initial pointer data to temp var
-    temp = temp.next = null;  // discard temp
     _head.data = 0;           // declaring 0 to first node data
     return tdata;             // return value
   }
@@ -88,9 +87,7 @@ class List
     Node temp = new Node();              // declare new node
     temp.next = _head.next.next;         // assign pointers for temp as third node
     int tdata = _head.next.data;         // store returning data
-    _head.next = _head.next.next = null; // nullyfing nodes to be delloc
     _head = temp;                        // moving pointers
-    temp = temp.next = null;             // nullyfing nodes to be delloc
     return tdata;                        // return value
   }
 
@@ -186,7 +183,7 @@ class List
     return tdata;
   }*/
 
-  public void Mostrar()
+  public void Print()
   {
     Console.Write("{ ");
     // usage of reference instead of a counter
@@ -202,6 +199,26 @@ class List
     int size = 0;
     for(Node n = _head; n != _tail; n = n.next, size++);
     return size;
+  }
+//Em nossa lista flexível, implemente um método que remove a segunda posição válida.
+  public int RemoveSecond()
+  {
+    Node n = _head;
+    int tdata = _head.next.next.data;
+    _head.next = _head.next.next;
+    n.next = null;
+    return tdata;
+  }
+
+//Task - Em nossa lista flexível, implemente um método que retorna a soma os elementos contidos na mesma.
+  public int Sum()
+  {
+    int temp = 0;
+    for(Node n = _head; n != null; n = n.next)
+    {
+      temp += n.data;
+    }
+    return temp;
   }
 }
 
@@ -219,30 +236,42 @@ class REFCL01
     list.AddPosition(20, 2);
     list.AddEnd(99);
     
-    list.Mostrar();
+    list.Print();
     Console.WriteLine();
     
     int logicallyRemoved = list.RemoveStartLog();
     int professorRemoved = list.RemoveStartProfessor();
-    int physicallyRemovedA = list.RemoveStartPhysA();
-    int physicallyRemovedB = list.RemoveStartPhysB();
+    int secondRemoved = list.RemoveSecond();
+    int listSum = list.Sum();
     
     Console.WriteLine($"\nHead Logically Removed: {logicallyRemoved}");
     Console.WriteLine($"Professor Removed: {professorRemoved}");
-    Console.WriteLine($"Head Phsyically Removed A: {physicallyRemovedA}");
-    Console.WriteLine($"Head Phsyically Removed B: {physicallyRemovedB}");
-    
-    /*
-    Not functional methods:
-
-    Remove At Postion pos
-    int pos = 2;
-    int posRemove = list.RemovePosition(pos);
-    Console.WriteLine($"Position {pos} Removed:\n{posRemove}");
-
-    Remove End
-    int tailRemove = list.RemoveEnd();
-    Console.WriteLine($"End of List Removed: {tailRemove}");
-    */
+    Console.WriteLine($"Second Removed: {secondRemoved}");
+    Console.WriteLine($"List Sum: {listSum}");
   }
 }
+/*
+Methods with Bugs:
+    
+RemoveStartPhysA & RemoveStartPhysB
+    
+int physicallyRemovedA = list.RemoveStartPhysA();
+int physicallyRemovedB = list.RemoveStartPhysB();
+
+Console.WriteLine($"Head Phsyically Removed A: {physicallyRemovedA}");
+Console.WriteLine($"Head Phsyically Removed B: {physicallyRemovedB}");
+*/
+
+// ---------------------------------- //
+
+/*
+Not functional methods:
+
+RemovePosition(n) & RemoveEnd()
+
+int posRemove = list.RemovePosition(2);
+Console.WriteLine($"Position {pos} Removed:\n{posRemove}");
+
+int tailRemove = list.RemoveEnd();
+Console.WriteLine($"End of List Removed: {tailRemove}");    
+*/
