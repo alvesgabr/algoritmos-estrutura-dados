@@ -86,35 +86,32 @@ class Tree
 class BINTR01
 {
   static void Main(string[] args)
-  {
-
-  }
+  {}
 }
 
 /**
-  class notes
-
+class notes
   // ----- Definition ----- //
-> binary trees uses a parent:child concept,
+» binary trees uses a parent:child concept,
 
-> parent nodes are called internal nodes and,
+» parent nodes are called internal nodes and,
   nodes with no children are external or leaves
 
-> tree height = n edges till target node
+» tree height = n edges till target node
 
-> balanced tree = mirror of subtree of acceptable diff +- 1
+» balanced tree = mirror of subtree of acceptable diff +- 1
 
-> worst case scenario for a search in bintree = θ(lg2 of nodes),
+» worst case scenario for a search in bintree = θ(lg2 of nodes),
   balanc bintree: 1024 nodes = 10 comparisons max / worst case,
   linear bintree: 1024 nodes = 1024 comparisons max/ worst case
 
-> sorted bintree: 
+» sorted bintree: 
   left child = c<P, 
   right child = c>P,
   P = parent node, c = child
 
   // ----- Algorithms ----- //
-> search algorithm:
+» search algorithm:
   recursive comparison with x to n,
     x = given value, n = root node,
     if x == n : return true,
@@ -122,7 +119,7 @@ class BINTR01
     elif x < n : n = left child, continue,
     else n == null : return false, empty tree
 
-> running algorithm:
+» running algorithm:
   recursive ordered method:
     - go left child,
     - print data,
@@ -144,7 +141,7 @@ class BINTR01
    - then it prints furtherst data in right subtree in recursive,
    - pre ordered prints left subtrees in recursive first, then right subt
 
-> insertion algorithm:
+» insertion algorithm:
   use search algorithm,
     x = given value, n = root node,
     if n == null : n = x,
@@ -152,7 +149,7 @@ class BINTR01
     lif n != null && x < n : n = left child, continue,
     else n == x : 'duplicate data'
 
-> removal algorithm:
+» removal algorithm:
   use search algorithm to find given value,
   in case its an external node, assign null,
     n = root node, x = given value, n == x = true,
@@ -178,16 +175,16 @@ class BINTR01
     if lv.right != null, lv.Parent.left = lv.right
   
   // ----- Rotations & AVL ----- //
-> basic rotation principle: rotate counterweight,
+» basic rotation principle: rotate counterweight,
   i.e.: {G.3 -> P.6 -> C.9} => {C.3 <- P.6 -> C.9},
   _lines 36 -> 59
 
-> double rotation: when grand:chid is parent:child reversed,
+» double rotation: when grand:chid is parent:child reversed,
   i.e.: {G.3 -> P.9 <- C.6} => {C.3 <- P.6 -> C.9},
   i.e.: {G.9 <- P.3 -> C.6} => {C.3 <- P.6 -> C.9},
   _lines 65 -> 82
 
-> AVL BST
+» AVL BST
   avl bst are self-balancing binary search tree,
   invented by Georgy Adelson-Velskii and Evgenii Landis in 1962
 
@@ -198,4 +195,4 @@ class BINTR01
   
   RightTurn: avl_value = -2, node.left = -1 || 0,
   LeftRightTurn: avl_value = -2, node.left = 1  
-**/
+*/
